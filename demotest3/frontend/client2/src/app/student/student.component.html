@@ -1,0 +1,31 @@
+<div class="content">
+  
+  <h1 class="title"> ระบบบันทึกข้อมูลนักศึกษา </h1> <br>
+  <mat-form-field class="example-full-width">
+    <mat-label>ชื่อ</mat-label>
+    <textarea matInput placeholder="Ex. นาย/นาง/นางสาว..." [(ngModel)]="student.name" name="name"></textarea>    
+  </mat-form-field>  
+  <mat-form-field class="example-full-width3">
+    <mat-label>นามสกุล</mat-label>
+    <textarea matInput [(ngModel)]="student.lastname" name="lastname"></textarea>    
+  </mat-form-field>  
+
+  <mat-form-field class="example-full-width2">
+    <mat-label>สาขาวิชา</mat-label>
+    <textarea matInput placeholder=""[(ngModel)]="student.major" name="major"></textarea>
+  </mat-form-field><br>  
+
+  <mat-form-field>
+    <mat-label>วัน-เดือน-ปีเกิด</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="student.bdate" name="date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field><br>
+
+
+    <button mat-button color="primary" class="button1" (click)="save()"> บันทึกข้อมูล </button>&nbsp;
+    <button mat-button color="primary" class="button1" (click)='goEditStudent()'> แก้ไขข้อมูล </button>    
+
+
+   
+</div>
