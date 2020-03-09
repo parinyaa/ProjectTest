@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Student, StudentService } from '../service/student.service';
 import { EditStudentService } from '../service2/edit-student.service';
+import { HttpClient} from '@angular/common/http';
 
 
 
@@ -18,11 +19,13 @@ export class EditStudentComponent implements OnInit {
   lastnames : Array<any>;
   majors : Array<any>
   bdate : Date;
-  sData : Array<any>;
+  studentData : Array<any>;
+  public API: string = "http://localhost:8090";
 
   constructor(
     private service: EditStudentService,
     private router: Router,
+    private httpClient: HttpClient,
     private route: ActivatedRoute,
     private studentService: StudentService,
   ) { }
@@ -32,15 +35,6 @@ export class EditStudentComponent implements OnInit {
       this.sId2 = data;
       console.log(this.sId2);
     });
-    this.studentService.getId(1).subscribe(data => {
-      this.sData = data;
-    
-      console.log(this.sData);
-    });
-
-    // this.service.getCustomer(this.date,this.dateEnd).subscribe(data => {
-    //   this.Customers = data;
-    // });
     }
 
     
@@ -49,5 +43,14 @@ export class EditStudentComponent implements OnInit {
       
     });
   }
+  getId(sId : any){
+    this.studentService.getId(sId).subscribe(data => {
+      this.studentData = data;
+      console.log(this.studentData);
+    });
+  }
 
+  // save2(){
+  //   console.log(this.student);
+  // }
 }

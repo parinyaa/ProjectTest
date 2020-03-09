@@ -25,6 +25,7 @@ export class StudentService {
     return this.http.get(this.APT + '/Student/' + sId);
   
   }
+
 }
 
 

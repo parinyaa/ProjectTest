@@ -60,4 +60,21 @@ public class StudentController{
         return ResponseEntity.ok().body(student);
     }
 
+    // @PutMapping("/{sId}")
+    // public ResponseEntity<?> putStudent(@PathVariable Long id, @Valid @RequestBody Student body) {
+    //     Optional<Student> student = studentRepository.updateStudent(id, body);
+    //     if(!student.isPresent()) {
+    //         return ResponseEntity.notFound().build();
+    //     }
+    //     return ResponseEntity.ok().build();
+    // }
+
+    // @DeleteMapping("/{sId}")
+    // public ResponseEntity<?> deleteStudent(@PathVariable Long sId) {
+    //     if(!studentRepository.deleteStudent(sId)) {
+    //         return ResponseEntity.notFound().build();
+    //     }
+    //     return ResponseEntity.ok().build();
+    // }
+
 }
