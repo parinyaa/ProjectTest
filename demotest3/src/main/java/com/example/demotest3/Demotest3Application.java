@@ -4,10 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
-
-
-import java.util.Date;
-import java.util.stream.Stream;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.example.demotest3.entity.Student;
 import com.example.demotest3.repository.StudentRepository;
@@ -25,7 +22,6 @@ public class Demotest3Application {
 		return args -> {			
 
 				Student student = new Student();
-				// Date bDate = new Date();
 				student.setName("Jack");
 				student.setLastname("Smith");
 				student.setMajor("ComputerEngneering");

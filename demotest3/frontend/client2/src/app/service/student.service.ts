@@ -12,7 +12,7 @@ export class StudentService {
       'Content-Type' : 'application/json'
     })
   };
-  public APT = '//localhost:8090';
+  public APT = 'http://localhost:8090';
 
   constructor(private http: HttpClient) { }
   
@@ -26,6 +26,11 @@ export class StudentService {
   
   }
 
+  deleteStu(sId: any): Observable<any> {
+    return this.http.delete(this.APT + '/EditStudent/' + sId);
+  
+  }
+
 }
 
 
@@ -34,7 +39,8 @@ export class Student {
   sId : any;
   name : any ;
   lastname : any;
-  bDate : Date;
+  bDate : Date; 
+  key: any;
 
 }
 

@@ -1,16 +1,9 @@
 package com.example.demotest3.controller;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import javax.validation.Valid;
-
 import com.example.demotest3.entity.Student;
 import com.example.demotest3.repository.StudentRepository;
-import com.jayway.jsonpath.Option;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,15 +19,20 @@ import org.springframework.http.ResponseEntity;
 
 
 @RestController
-@CrossOrigin(origins = "*")
-
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class StudentController{
     @Autowired
     public StudentRepository studentRepository;
 
     @GetMapping("/Student")
     public Collection<Student> Student() {
+        
+        return studentRepository.findAll().stream().collect(Collectors.toList());
+    }
 
+    @GetMapping("/EditStudent")
+    public Collection<Student> EditStudent() {
+        
         return studentRepository.findAll().stream().collect(Collectors.toList());
     }
 
@@ -69,12 +67,12 @@ public class StudentController{
     //     return ResponseEntity.ok().build();
     // }
 
-    // @DeleteMapping("/{sId}")
-    // public ResponseEntity<?> deleteStudent(@PathVariable Long sId) {
-    //     if(!studentRepository.deleteStudent(sId)) {
-    //         return ResponseEntity.notFound().build();
-    //     }
-    //     return ResponseEntity.ok().build();
-    // }
+    @DeleteMapping("/EditStudent/{sId}")
+    public Student delete(@PathVariable long sId) {
+        Student student = studentRepository.findById(sId).get();
+        studentRepository.delete(student); 
+        // System.out.println("testttt");      
+        return student;
+    }
 
 }

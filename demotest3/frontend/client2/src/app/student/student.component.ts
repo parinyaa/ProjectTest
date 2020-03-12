@@ -4,6 +4,7 @@ import { HttpClient} from '@angular/common/http';
 import { StudentService, Student } from 'src/app/service/student.service';
 // import { DialogService } from 'src/app/dialog/dialog.service';
 import { from } from 'rxjs';
+import { NotificationService } from '../service/notification.service';
 
 @Component({
   selector: 'app-student',
@@ -28,7 +29,8 @@ export class StudentComponent implements OnInit {
     private studentService : StudentService,
     private httpClient: HttpClient, 
     // private dialog: DialogService,       
-    private router: Router
+    private router: Router,
+    public notification: NotificationService
   
   ) { }
 
@@ -42,7 +44,8 @@ export class StudentComponent implements OnInit {
   save(){
     this.httpClient.post(this.API + '/newStudent', this.student).subscribe((data) => {
       console.log("Congratulations^^");
-      console.log(data);     
+      console.log(data);
+      this.notification.saveSuccess();      
       
     }, err => {
       console.log("Error Happen!!!!");

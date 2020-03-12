@@ -8,7 +8,7 @@
     margin-top: -300px;
     margin-left: -200px;
     border-radius: 5px;
-    text-align: center;
+    /* text-align: center; */
     font-size: 16px;
 
 }
@@ -20,31 +20,28 @@
 }
 
 .button1{
-    width: 150px;
-    font-size: 20px;
+    width: 130px;
+    font-size: 15px;
     cursor: pointer;
     margin: 50px auto;
     /* display: block; */
     transition: all 0.3s ease 0s;
+    top: 50%;
+    left: 85%;
 }
 .button1:hover{
     background: salmon;
 }
 
-.example-full-width {
-    width: 100%;
-    text-align: center;
-}
-
-.example-full-width2 {
-    width: 100%;
-    text-align: center;
-}
-
-.example-full-width3 {
-    width: 100%;
-    text-align: center;
-}
 mat-card {
     max-width: 100%;
+}
+
+ .container{
+    margin: auto;
+}
+
+table {
+    width: 100%;
+    
 }

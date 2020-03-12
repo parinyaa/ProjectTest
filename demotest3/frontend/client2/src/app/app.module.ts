@@ -7,6 +7,7 @@ import { StudentComponent } from './student/student.component';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
 
+
 import { 
   MatButtonModule,
   MatCardModule,
@@ -23,6 +24,7 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatSnackBarModule,
+
   
 } from '@angular/material';
 
@@ -59,6 +61,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

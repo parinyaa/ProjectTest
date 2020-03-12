@@ -1,11 +1,9 @@
 package com.example.demotest3.entity;
 
 import java.util.Date;
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 
 @Entity
 @Table(name="sutudent")
@@ -13,7 +11,7 @@ public class Student{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @SequenceGenerator(name="sId_seq",sequenceName ="sId_seq")
-    
+
     private long sId;
     @Column(name = "name")
     private String name;
@@ -55,8 +53,8 @@ public class Student{
         return sId;
     }
 
-    public void setsId(Long id) {
-        this.sId = id;
+    public void setsId(long sId) {
+        this.sId = sId;
     }
 
     public Date getbDate() {
@@ -74,4 +72,10 @@ public class Student{
         this.bDate = bDate;
     }
     
+
+
 }
+
+
+
+    

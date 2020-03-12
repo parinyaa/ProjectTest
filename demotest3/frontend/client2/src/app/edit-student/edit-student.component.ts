@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Student, StudentService } from '../service/student.service';
 import { EditStudentService } from '../service2/edit-student.service';
 import { HttpClient} from '@angular/common/http';
+import { NotificationService } from '../service/notification.service';
 
 
 
@@ -12,15 +13,21 @@ import { HttpClient} from '@angular/common/http';
   styleUrls: ['./edit-student.component.css']
 })
 export class EditStudentComponent implements OnInit {
+  
+  public API: string = "http://localhost:8090";
+  
   student: Student = new Student();
   sId : number; 
-  sId2 : Array<any>
+  students : Array<Student>
   names : Array<any>;
   lastnames : Array<any>;
   majors : Array<any>
   bdate : Date;
   studentData : Array<any>;
-  public API: string = "http://localhost:8090";
+   
+ 
+  displayedColumns: string[] = ['sId', 'name', 'lastname', 'major','bDate','action','action2'];
+ 
 
   constructor(
     private service: EditStudentService,
@@ -28,14 +35,21 @@ export class EditStudentComponent implements OnInit {
     private httpClient: HttpClient,
     private route: ActivatedRoute,
     private studentService: StudentService,
+    public notification: NotificationService
+    
   ) { }
 
   ngOnInit() {
+
     this.studentService.getAll().subscribe(data => {
-      this.sId2 = data;
-      console.log(this.sId2);
-    });
-    }
+      this.students = data;
+      console.log(this.students);
+
+    });  
+    
+  }
+
+
 
     
   goStudent(){
@@ -44,13 +58,27 @@ export class EditStudentComponent implements OnInit {
     });
   }
   getId(sId : any){
-    this.studentService.getId(sId).subscribe(data => {
+      this.studentService.getId(sId).subscribe(data => {
       this.studentData = data;
-      console.log(this.studentData);
+        console.log(this.studentData);
     });
   }
 
-  // save2(){
-  //   console.log(this.student);
-  // }
+  deleteStu(sId : any) {
+
+        if (confirm('Are you sure want to delete id = ' + sId)) {
+          this.studentService.deleteStu(sId).subscribe(res => {
+            console.log(res); 
+          this.notification.success(); 
+          
+          this.studentService.getAll().subscribe(data => {
+            this.students = data;
+            console.log(this.students);            
+          });  
+        }, err => {     
+          this.notification.error(); 
+            console.log(err); 
+        });
+      }
+    }
 }
