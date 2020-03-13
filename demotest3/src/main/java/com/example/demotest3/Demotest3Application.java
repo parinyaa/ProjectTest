@@ -21,12 +21,12 @@ public class Demotest3Application {
 	){
 		return args -> {			
 
-				Student student = new Student();
-				student.setName("Jack");
-				student.setLastname("Smith");
-				student.setMajor("ComputerEngneering");
-				student.setBDate(student.getbDate());		
-				studentRepository.save(student);		
+				// Student student = new Student();
+				// student.setName("Jack");
+				// student.setLastname("Smith");
+				// student.setMajor("ComputerEngneering");
+				// student.setBDate(student.getbDate());		
+				// studentRepository.save(student);		
 
 		};
 	}

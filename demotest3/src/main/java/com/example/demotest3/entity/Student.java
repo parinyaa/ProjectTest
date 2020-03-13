@@ -3,7 +3,7 @@ package com.example.demotest3.entity;
 import java.util.Date;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.NonNull;
 
 @Entity
 @Table(name="sutudent")
@@ -14,16 +14,22 @@ public class Student{
 
     private long sId;
     @Column(name = "name")
+    @NonNull
     private String name;
-    @Column(name = "lastname")
-    private String lastname;
-    @Column(name = "major")
-    private String major;
-    @JsonFormat (shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date bDate;
 
-    public Student(){}
- 
+    @Column(name = "lastname")
+    @NonNull
+    private String lastname;
+    
+    @Column(name = "major")
+    @NonNull
+    private String major;
+
+    @NonNull
+    @Temporal(TemporalType.DATE)
+    private @io.micrometer.core.lang.NonNull Date bDate;    
+
+    public Student(){} 
 
     public String getName() {
         return name;
@@ -70,6 +76,12 @@ public class Student{
         this.lastname = lastname;
         this.major = major;
         this.bDate = bDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Student [bDate=" + bDate + ", lastname=" + lastname + ", major=" + major + ", name=" + name + ", sId="
+                + sId + "]";
     }
     
 

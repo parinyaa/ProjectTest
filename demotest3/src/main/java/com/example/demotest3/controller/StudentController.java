@@ -1,6 +1,9 @@
 package com.example.demotest3.controller;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import com.example.demotest3.entity.Student;
 import com.example.demotest3.repository.StudentRepository;
@@ -36,16 +39,39 @@ public class StudentController{
         return studentRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping(path = "/newStudent")
-    private Student newStudent(@RequestBody Student student){
-        Student s = new Student();
+    @GetMapping("/Editstudent/{sId}")
+    public Optional<Student> reservation(@PathVariable Long id) {
+        Optional<Student> sr = studentRepository.findById(id);
+        return sr;
+    }
 
+    @PostMapping(path = "/editStudent")
+    private Student editStudent(@RequestBody Student student){        
+        Student s = studentRepository.findById(student.getsId()).get();
         s.setBDate(student.getbDate());
         s.setName(student.getName());
         s.setLastname(student.getLastname());
         s.setMajor(student.getMajor());      
-
+        System.out.println(s);
         return studentRepository.save(s);
+    }
+
+
+    @PostMapping(path ="/newStudent")
+    public Student newStudent(@RequestBody Student student){
+        List<Student> studentlist = studentRepository.findByNameAndLastname(student.getName(),student.getLastname());
+        System.out.println("StudentCheck "+ studentlist.size());
+        Student s2 = new Student();
+            if(studentlist.size() == 0){
+            
+                s2.setName(student.getName());
+                s2.setLastname(student.getLastname());
+                s2.setMajor(student.getMajor());
+                s2.setBDate(student.getbDate());
+    
+                return studentRepository.save(s2);            
+            }else
+        return null;
     }
 
 
@@ -58,21 +84,14 @@ public class StudentController{
         return ResponseEntity.ok().body(student);
     }
 
-    // @PutMapping("/{sId}")
-    // public ResponseEntity<?> putStudent(@PathVariable Long id, @Valid @RequestBody Student body) {
-    //     Optional<Student> student = studentRepository.updateStudent(id, body);
-    //     if(!student.isPresent()) {
-    //         return ResponseEntity.notFound().build();
-    //     }
-    //     return ResponseEntity.ok().build();
-    // }
 
     @DeleteMapping("/EditStudent/{sId}")
     public Student delete(@PathVariable long sId) {
         Student student = studentRepository.findById(sId).get();
         studentRepository.delete(student); 
-        // System.out.println("testttt");      
+        System.out.println("testDelete");      
         return student;
     }
+    
 
 }
