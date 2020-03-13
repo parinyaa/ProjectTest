@@ -61,7 +61,7 @@ mat-card {
     height: 50px;
     font-size: 18px;
 }
-.name-input, .major, .lastname, .select-sport{
+.name-input, .major, .lastname, .select-sport, .bDate{
   width: 100%;
   margin-bottom: 10px;
   text-align: center;

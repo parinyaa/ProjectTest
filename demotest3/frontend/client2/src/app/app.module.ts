@@ -24,6 +24,8 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatSnackBarModule,
+  MatPaginator,
+  MatPaginatorModule,
 
   
 } from '@angular/material';
@@ -55,12 +57,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSidenavModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule,
-    MatSnackBarModule,
+    MatSnackBarModule,    
     RouterModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatPaginatorModule
     
   ],
   providers: [],

@@ -5,6 +5,7 @@ import { StudentService, Student } from 'src/app/service/student.service';
 // import { DialogService } from 'src/app/dialog/dialog.service';
 import { from } from 'rxjs';
 import { NotificationService } from '../service/notification.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'app-student',
@@ -30,9 +31,16 @@ export class StudentComponent implements OnInit {
     private httpClient: HttpClient, 
     // private dialog: DialogService,       
     private router: Router,
-    public notification: NotificationService
+    public notification: NotificationService,
+    public snackBar: MatSnackBar
   
   ) { }
+
+  config: MatSnackBarConfig = {
+    duration: 6000,
+    horizontalPosition: 'right',
+    verticalPosition: 'top'
+  }
 
   ngOnInit() {
 
@@ -42,15 +50,26 @@ export class StudentComponent implements OnInit {
   }
 
   save(){
-    this.httpClient.post(this.API + '/newStudent', this.student).subscribe((data) => {
-      console.log("Congratulations^^");
-      console.log(data);
-      this.notification.saveSuccess();      
+      if( this.student.name != null && this.student.lastname != null && this.student.major != null && this.student.bDate != null){
+        this.httpClient.post(this.API + '/newStudent', this.student).subscribe((data) => {
+          console.log("Congratulations^^");
+          console.log(data);
+          if(data == null){
+            this.notification.saveError(); 
+          }else{
+            this.notification.saveSuccess(); 
+          }                  
       
-    }, err => {
-      console.log("Error Happen!!!!");
+      }, err => {
+        console.log("Error Happen!!!!");
       // this.dialog.foundNull();
-    });
-  }
+      });
 
+      }else{
+        console.log("คุณกรอกข้อมูลไม่ครบ");
+        this.config['panelClass'] = ['notification','error'];
+        this.snackBar.open('ไม่สามารถบันทึกข้อมูลได้กรุณากรอกให้ครบ','', this.config);
+
+    }
+  }
 }

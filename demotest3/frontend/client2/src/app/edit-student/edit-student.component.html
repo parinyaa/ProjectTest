@@ -1,7 +1,13 @@
+<div class= "content">
+  <mat-toolbar class="Editing" color="primary">
+    <h1>แก้ไขข้อมูล</h1>
+  </mat-toolbar>  
+</div>
 
-<button mat-button color="primary" class="button1" (click)='goStudent()'> กลับสู่หน้าบันทึก </button>    
 
-<div class="list">
+<button mat-raised-button color="primary" class="button1" (click)='goStudent()'> Back </button>    
+
+<div class="list">  
 <table mat-table [dataSource]="students" class="mat-elevation-z8">
   
   <ng-container matColumnDef="sId">
@@ -9,43 +15,78 @@
     <td mat-cell *matCellDef="let element"> {{element.sId}} </td>
    </ng-container>
 
-  <!-- Name Column -->
+
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <th mat-header-cell *matHeaderCellDef>ชื่อ</th>
+    <td mat-cell *matCellDef="let element">
+      <span *ngIf="!(enableEdit && enableEditIndex == i && sid == element.sId)">{{element.name}}</span>
+      <div *ngIf="enableEdit && enableEditIndex == i && sid == element.sId">
+        <mat-form-field appearance="outline"> 
+          <mat-label>ชื่อ: Ex. นาย/นางสาว..</mat-label>
+          <input matInput placeholder="Placeholder" [(ngModel)]="name1">        
+        </mat-form-field>
+      </div>
+    </td>   
   </ng-container>
 
-  <!-- Lastname Column -->
+
   <ng-container matColumnDef="lastname">
-    <th mat-header-cell *matHeaderCellDef>Lastname</th>
-    <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+    <th mat-header-cell *matHeaderCellDef>นามสกุล</th>
+    <td mat-cell *matCellDef="let element">
+      <span *ngIf="!(enableEdit && enableEditIndex == i && sid == element.sId)">{{element.lastname}}</span>
+      <div *ngIf="enableEdit && enableEditIndex == i && sid == element.sId">
+        <mat-form-field appearance="outline">
+          <mat-label>นามสกลุ</mat-label>         
+          <input matInput placeholder="Placeholder" [(ngModel)]="lastname1">        
+        </mat-form-field>
+      </div>
+    </td>       
   </ng-container>
 
-  <!-- Major Column -->
-  <ng-container matColumnDef="major">
-    <th mat-header-cell *matHeaderCellDef>Major</th>
-    <td mat-cell *matCellDef="let element"> {{element.major }} </td>
-  </ng-container>
+  <ng-container matColumnDef="major" >
+    <th mat-header-cell *matHeaderCellDef>สาขาวิชา/คณะ</th>
+    <td mat-cell *matCellDef="let element">
+      <span *ngIf="!(enableEdit && enableEditIndex == i && sid == element.sId)">{{element.major}}</span>
+      <div *ngIf="enableEdit && enableEditIndex == i && sid == element.sId">
+        <mat-form-field appearance="outline">
+          <mat-label>สาขาวิชา/คณะ</mat-label>              
+          <input matInput placeholder="Placeholder" [(ngModel)]="major1">        
+        </mat-form-field>
+      </div>
+    </td>       
+  </ng-container>          
+          
+
 
   <ng-container matColumnDef="bDate">
-    <th mat-header-cell *matHeaderCellDef>DD-MM-YY</th>
-    <td mat-cell *matCellDef="let element"> {{element.bDate }} </td>
+    <th mat-header-cell *matHeaderCellDef>วันเกิด</th>
+    <td mat-cell *matCellDef="let element">
+      <span *ngIf="!(enableEdit && enableEditIndex == i && sid == element.sId)">{{element.bDate}}</span>
+      <div *ngIf="enableEdit && enableEditIndex == i && sid == element.sId">
+        <mat-form-field appearance="outline">
+          <mat-label>MM-DD-YYYY</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="bDate1">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      </div>
+    </td> 
   </ng-container>
 
   <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef>Delete</th>
-    <td mat-cell *matCellDef="let element"><button mat-raised-button color="warn" (click)='deleteStu(element.sId)'>Delete</button></td>
+    <th mat-header-cell *matHeaderCellDef>ลบข้อมูล</th>
+    <td mat-cell *matCellDef="let element"><button mat-raised-button color="warn" (click)='deleteStu(element.sId)'>ลบข้อมูล</button></td>
   </ng-container>
 
   <ng-container matColumnDef="action2">
-    <th mat-header-cell *matHeaderCellDef>Edit</th>
-    <td mat-cell *matCellDef="let element"><button mat-raised-button color="warn" (click)='Edit()'>Edit</button></td>    
+    <th mat-header-cell *matHeaderCellDef>แก้ไข</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="warn" *ngIf="enableEdit && enableEditIndex == i && sid == element.sId" (click)="submitEdit()" type="submit">บันทึกข้อมูล</button>&nbsp;
+      <button mat-raised-button color="warn" *ngIf="enableEdit && enableEditIndex == i && sid == element.sId" (click)="cancel()">ยกเลิก</button>      
+      <button mat-raised-button color="warn" *ngIf="!enableEdit" (click)="enableEditMethod(element)">แก้ไข</button></td>    
   </ng-container>
-
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 </div>
-
-

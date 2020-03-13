@@ -39,8 +39,8 @@ export class Student {
   sId : any;
   name : any ;
   lastname : any;
-  bDate : Date; 
-  key: any;
+  major : any;
+  bDate : Date;  
 
 }
 

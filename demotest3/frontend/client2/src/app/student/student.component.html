@@ -1,7 +1,7 @@
 <div class= "content">
   <mat-card class="example-card">
-    <mat-card-header>
-        <h2>ระบบบันทึกข้อมูลนักศึกษา</h2>         
+    <mat-card-header>      
+        <h2>บันทึกข้อมูลนักศึกษา</h2>              
     </mat-card-header>
     
     <mat-card class="card mat-elevation-z8">
@@ -17,13 +17,13 @@
               </mat-form-field>  
             
               <mat-form-field class="major">
-                <mat-label>สาขาวิชา</mat-label>
+                <mat-label>สาขาวิชา/คณะ</mat-label>
                 <textarea matInput placeholder=""[(ngModel)]="student.major" name="major"></textarea>
               </mat-form-field><br>  
 
-                <mat-form-field>
-                  <mat-label>วัน-เดือน-ปีเกิด</mat-label>
-                  <input matInput [matDatepicker]="picker" [(ngModel)]="student.bdate" name="date">
+                <mat-form-field class="bDate">
+                  <mat-label>วันเกิด</mat-label>
+                  <input matInput [matDatepicker]="picker" [(ngModel)]="student.bDate" name="date">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>            
