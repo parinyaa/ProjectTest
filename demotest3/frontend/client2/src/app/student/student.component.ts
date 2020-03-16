@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient} from '@angular/common/http';
 import { StudentService, Student } from 'src/app/service/student.service';
-// import { DialogService } from 'src/app/dialog/dialog.service';
 import { from } from 'rxjs';
 import { NotificationService } from '../service/notification.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
@@ -28,8 +27,7 @@ export class StudentComponent implements OnInit {
 
   constructor(
     private studentService : StudentService,
-    private httpClient: HttpClient, 
-    // private dialog: DialogService,       
+    private httpClient: HttpClient,           
     private router: Router,
     public notification: NotificationService,
     public snackBar: MatSnackBar
@@ -52,7 +50,7 @@ export class StudentComponent implements OnInit {
   save(){
       if( this.student.name != null && this.student.lastname != null && this.student.major != null && this.student.bDate != null){
         this.httpClient.post(this.API + '/newStudent', this.student).subscribe((data) => {
-          console.log("Congratulations^^");
+          console.log("SaveSuccess^^");
           console.log(data);
           if(data == null){
             this.notification.saveError(); 
@@ -61,8 +59,7 @@ export class StudentComponent implements OnInit {
           }                  
       
       }, err => {
-        console.log("Error Happen!!!!");
-      // this.dialog.foundNull();
+        console.log("Error Happen!!!!");      
       });
 
       }else{

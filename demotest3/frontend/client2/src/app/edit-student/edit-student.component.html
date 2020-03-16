@@ -1,20 +1,15 @@
-<div class= "content">
-  <mat-toolbar class="Editing" color="primary">
-    <h1>แก้ไขข้อมูล</h1>
-  </mat-toolbar>  
-</div>
-
-
-<button mat-raised-button color="primary" class="button1" (click)='goStudent()'> Back </button>    
-
-<div class="list">  
-<table mat-table [dataSource]="students" class="mat-elevation-z8">
+<div class="content">
+  <body class="background">
+    <mat-card-header class="header" style="color:white;">
+      <h1>แก้ไขข้อมูล</h1>    
+    </mat-card-header>    
+    <button mat-raised-button color="accent" class="button1" (click)='goStudent()'> กลับหน้าบันทึก </button>    
+  <table mat-table [dataSource]="students" class="mat-elevation-z8">
   
   <ng-container matColumnDef="sId">
     <th mat-header-cell *matHeaderCellDef>ID</th>
     <td mat-cell *matCellDef="let element"> {{element.sId}} </td>
    </ng-container>
-
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>ชื่อ</th>
@@ -28,7 +23,6 @@
       </div>
     </td>   
   </ng-container>
-
 
   <ng-container matColumnDef="lastname">
     <th mat-header-cell *matHeaderCellDef>นามสกุล</th>
@@ -54,9 +48,7 @@
         </mat-form-field>
       </div>
     </td>       
-  </ng-container>          
-          
-
+  </ng-container>         
 
   <ng-container matColumnDef="bDate">
     <th mat-header-cell *matHeaderCellDef>วันเกิด</th>
@@ -89,4 +81,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+</body>
 </div>

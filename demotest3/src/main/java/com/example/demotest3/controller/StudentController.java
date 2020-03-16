@@ -47,13 +47,19 @@ public class StudentController{
 
     @PostMapping(path = "/editStudent")
     private Student editStudent(@RequestBody Student student){        
+        List<Student> studentlist = studentRepository.findByNameAndLastname(student.getName(),student.getLastname());
+        System.out.println("StudentCheckEdit "+ studentlist.size());
         Student s = studentRepository.findById(student.getsId()).get();
+        if(studentlist.size() == 0){
         s.setBDate(student.getbDate());
         s.setName(student.getName());
         s.setLastname(student.getLastname());
         s.setMajor(student.getMajor());      
         System.out.println(s);
         return studentRepository.save(s);
+        }else{
+            return null;
+        }
     }
 
 
@@ -70,8 +76,10 @@ public class StudentController{
                 s2.setBDate(student.getbDate());
     
                 return studentRepository.save(s2);            
-            }else
-        return null;
+            }else{
+                return null;
+            }
+        
     }
 
 

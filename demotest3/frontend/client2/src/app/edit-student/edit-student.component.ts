@@ -19,10 +19,6 @@ export class EditStudentComponent implements OnInit {
   student: Student = new Student();
   sId : number; 
   students : Array<Student>
-  // names : Array<any>;
-  // lastname : Array<any>;
-  // major : Array<any>
-  // bDate :Date;
   studentData : Array<any>;
   enableEdit = false;
   enableEditIndex = null; 
@@ -111,17 +107,22 @@ export class EditStudentComponent implements OnInit {
       console.log("---------------------");
       console.log(this.student);
       this.enableEdit = false;      
-      this.saveEdit();     
+      this.saveEdit();           
     }
 
     saveEdit(){
       this.httpClient.post(this.API + '/editStudent' ,this.student).subscribe((data) => {
-        console.log(this.bDate1);
+        if(data == null){
+          this.notification.saveError();
+          console.log("testttt");
+        }else{
+          this.notification.saveSure();
+        }
+        // console.log(this.bDate1);
         console.log("Okay!!!");
-        console.log(data);    
-        this.notification.saveSure();
+        console.log(data);        
         this.studentService.getAll().subscribe(data => {
-          this.students = data;
+          this.students = data;                    
           // console.log(this.students);
         });        
       }, err => {
